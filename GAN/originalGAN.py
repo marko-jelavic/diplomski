@@ -7,12 +7,13 @@ import matplotlib.pyplot as plt
 import os
 import matplotlib.gridspec as gridspec
 
+
 mnist = input_data.read_data_sets('MNIST_data', one_hot=True)
 
 # *** GENERATING LATENT VARIABLES ***
 
 def LatentVariables(batch_size):
-    return np.random.uniform(-1, 1, size=(batch_size, 100))
+    return np.random.normal(0.0, 1.0, size=(batch_size, 100))
 
 # *** PLOTTING SAMPLES ***
 def plot(samples):
@@ -63,27 +64,33 @@ discriminator_params = [d_w1, d_b1, d_w2, d_b2]
 
 def Discriminator(x):
     d1 = tf.nn.relu(tf.matmul(x, d_w1) + d_b1)
-    D = tf.nn.sigmoid(tf.matmul(d1, d_w2) + d_b2)
-    return D
+    D_logit = tf.matmul(d1, d_w2) + d_b2
+    D = tf.nn.sigmoid(D_logit)
+    return D, D_logit
 
 G = Generator(z)
-D_real_sample = Discriminator(x)
-D_generated_sample = Discriminator(G)
+D_real_sample, D_logit_real_sample = Discriminator(x)
+D_generated_sample, D_logit_generated_sample = Discriminator(G)
 
-discriminator_loss = -tf.reduce_mean(tf.log(D_real_sample) + tf.log(1 - D_generated_sample))
-generator_loss = -tf.reduce_mean(tf.log(D_generated_sample))
+
+D_loss_real = tf.reduce_mean(tf.nn.sigmoid_cross_entropy_with_logits(logits=D_logit_real_sample, labels=tf.ones_like(D_real_sample)))
+D_loss_generated = tf.reduce_mean(tf.nn.sigmoid_cross_entropy_with_logits(logits=D_logit_generated_sample, labels=tf.zeros_like(D_generated_sample)))
+
+discriminator_loss = D_loss_real + D_loss_generated
+
+generator_loss = tf.reduce_mean(tf.nn.sigmoid_cross_entropy_with_logits(logits=D_logit_generated_sample, labels=tf.ones_like(D_generated_sample)))
 
 train_D = tf.train.GradientDescentOptimizer(0.01).minimize(discriminator_loss, var_list = discriminator_params)
 train_G = tf.train.AdamOptimizer().minimize(generator_loss, var_list = generator_params)
 
 config = tf.ConfigProto()
-config.gpu_options.allocator_type="BFC"
+config.gpu_options.per_process_gpu_memory_fraction = 0.8
 
 sess = tf.InteractiveSession(config=config)
 sess.run(tf.global_variables_initializer())
 
-num_iters = 150000
-batch_size = 550
+num_iters = 150001
+batch_size = 500
 
 if not os.path.exists('generated_samples/'):
     os.makedirs('generated_samples/')
