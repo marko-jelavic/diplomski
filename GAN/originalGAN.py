@@ -84,7 +84,7 @@ train_D = tf.train.GradientDescentOptimizer(0.01).minimize(discriminator_loss, v
 train_G = tf.train.AdamOptimizer().minimize(generator_loss, var_list = generator_params)
 
 config = tf.ConfigProto()
-config.gpu_options.per_process_gpu_memory_fraction = 0.8
+config.gpu_options.per_process_gpu_memory_fraction = 0.85
 
 sess = tf.InteractiveSession(config=config)
 sess.run(tf.global_variables_initializer())
