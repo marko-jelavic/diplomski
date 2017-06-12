@@ -42,20 +42,17 @@ z = tf.placeholder(tf.float32, shape=(None, 100))
 
 with tf.variable_scope("Generator"):
     
-    g_w1 = tf.Variable(tf.truncated_normal([100, 512], stddev = 0.02))
-    g_b1 = tf.constant(0.1, shape=[512])
+    g_w1 = tf.Variable(tf.truncated_normal([100, 1024], stddev = 0.02))
+    g_b1 = tf.constant(0.1, shape=[1024])
 
-    g_conv1 = tf.Variable(tf.truncated_normal([4, 4, 64, 128], stddev = 0.02))
-    g_conv1_bias = tf.constant(0.1, shape=[64])
+    g_w2 = tf.Variable(tf.truncated_normal([1024, 6272], stddev = 0.02))
+    g_b2 = tf.constant(0.1, shape=[6272])
 
-    g_conv2 = tf.Variable(tf.truncated_normal([7, 7, 32, 64], stddev = 0.02))
-    g_conv2_bias = tf.constant(0.1, shape=[32])
+    g_conv2 = tf.Variable(tf.truncated_normal([7, 7, 128, 128], stddev = 0.02))
+    g_conv2_bias = tf.constant(0.1, shape=[128])
 
-    g_conv3 = tf.Variable(tf.truncated_normal([14, 14, 16, 32], stddev = 0.02))
-    g_conv3_bias = tf.constant(0.1, shape=[16])
-
-    g_conv4 = tf.Variable(tf.truncated_normal([28, 28, 1, 16], stddev = 0.02))
-    g_conv4_bias = tf.constant(0.1, shape=[1])
+    g_conv3 = tf.Variable(tf.truncated_normal([14, 14, 1, 128], stddev = 0.02))
+    g_conv3_bias = tf.constant(0.1, shape=[1])
 
 
 def Generator(z):
@@ -65,37 +62,31 @@ def Generator(z):
     with tf.variable_scope("G1"):
 
         g1 = tf.matmul(z, g_w1) + g_b1
-        g1_reshaped = tf.reshape(g1, [-1, 2, 2, 128])
-        g1_batch_norm = tf.contrib.layers.batch_norm(g1_reshaped, decay=0.9, updates_collections=None, epsilon=0.00001, scale=True, is_training=True, scope="Generator")
+        g1_batch_norm = tf.contrib.layers.batch_norm(g1, decay=0.9, updates_collections=None, epsilon=0.00001, scale=True, is_training=True, scope="Generator")
         g1 = tf.nn.relu(g1_batch_norm)
 
     with tf.variable_scope("G2"):
 
-        g2 = tf.nn.conv2d_transpose(g1, g_conv1, [batch_size, 4, 4, 64], [1, 2, 2, 1], padding="SAME")
-        g2 = tf.nn.bias_add(g2, g_conv1_bias)
+        g2 = tf.matmul(g1, g_w2) + g_b2
         g2_batch_norm = tf.contrib.layers.batch_norm(g2, decay=0.9, updates_collections=None, epsilon=0.00001, scale=True, is_training=True, scope="Generator")
-        g2 = tf.nn.relu(g2_batch_norm)
+        g2_relu = tf.nn.relu(g2_batch_norm)
+        g2 = tf.reshape(g2_relu, [batch_size, 7, 7, 128])
 
     with tf.variable_scope("G3"):
 
-        g3 = tf.nn.conv2d_transpose(g2, g_conv2, [batch_size, 7, 7, 32], [1, 2, 2, 1], padding="SAME")
+        g3 = tf.nn.conv2d_transpose(g2, g_conv2, [batch_size, 14, 14, 128], [1, 2, 2, 1], padding="SAME")
         g3 = tf.nn.bias_add(g3, g_conv2_bias)
         g3_batch_norm = tf.contrib.layers.batch_norm(g3, decay=0.9, updates_collections=None, epsilon=0.00001, scale=True, is_training=True, scope="Generator")
         g3 = tf.nn.relu(g3_batch_norm)
 
     with tf.variable_scope("G4"):
 
-        g4 = tf.nn.conv2d_transpose(g3, g_conv3, [batch_size, 14, 14, 16], [1, 2, 2, 1], padding="SAME")
+        g4 = tf.nn.conv2d_transpose(g3, g_conv3, [batch_size, 28, 28, 1], [1, 2, 2, 1], padding="SAME")
         g4 = tf.nn.bias_add(g4, g_conv3_bias)
-        g4_batch_norm = tf.contrib.layers.batch_norm(g4, decay=0.9, updates_collections=None, epsilon=0.00001, scale=True, is_training=True, scope="Generator")
-        g4 = tf.nn.relu(g4)
     
-    g5 = tf.nn.conv2d_transpose(g4, g_conv4, [batch_size, 28, 28, 1], [1, 2, 2, 1], padding="SAME")
-    g5 = tf.nn.bias_add(g5, g_conv4_bias)
-    
-    g5_reshaped = tf.reshape(g5, [-1, 784])
+    g4_reshaped = tf.reshape(g4, [-1, 784])
 
-    G = tf.nn.tanh(g5_reshaped)
+    G = tf.nn.sigmoid(g4_reshaped)
 
     return G
 
