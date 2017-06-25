@@ -1,0 +1,28 @@
+****TEST SCORES FOR USING ENTIRE MNIST****
+Test score for normal linear SVM:
+0.9178
+Test score for featured linear SVM:
+0.9765
+Test score for normal Logistic Regression:
+0.9198
+Test score for featured Logistic Regression:
+0.9795
+****TEST SCORES FOR USING 10 SAMPLES PER CLASS MNIST****
+Test score for normal linear SVM for 10 samples per class:
+0.7222
+Test score for featured linear SVM for 10 samples per class:
+0.7576
+Test score for normal Logistic Regression for 10 samples per class:
+0.7315
+Test score for featured Logistic Regression for 10 samples per class:
+0.7447
+****TEST SCORES FOR USING 100 SAMPLES PER CLASS MNIST****
+Test score for normal linear SVM for 100 samples per class:
+0.8313
+Test score for featured linear SVM for 100 samples per class:
+0.9315
+Test score for normal Logistic Regression for 100 samples per class:
+0.8585
+Test score for featured Logistic Regression for 100 samples per class:
+0.9379
+
