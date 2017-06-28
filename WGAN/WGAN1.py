@@ -160,11 +160,11 @@ G = Generator(z)
 
 with tf.variable_scope("Real"):
 
-    D_real_sample= Discriminator(x)
+    D_real_sample = Discriminator(x)
 
 with tf.variable_scope("Generated"):
 
-    D_generated_sample= Discriminator(G)
+    D_generated_sample = Discriminator(G)
 
 discriminator_loss = tf.reduce_mean(D_real_sample) - tf.reduce_mean(D_generated_sample)
 
