@@ -215,9 +215,10 @@ sess.run(tf.global_variables_initializer())
 num_iters = 1
 batch_size = 64
 
-if not os.path.exists('generated_samples_testuntrained/'):
-    os.makedirs('generated_samples_testuntrained/')
+if not os.path.exists('generated_samples_test/'):
+    os.makedirs('generated_samples_test/')
 
+#saver.restore(sess, "weights/model.ckpt")
 samples = sess.run(G, feed_dict={z: LatentVariables(25)})
 fig = plot(samples)
 plt.savefig
@@ -236,27 +237,21 @@ for y_test_ in y_test:
 
 features_train = sess.run(D_real_features, feed_dict={x: x_train})
 features_test = sess.run(D_real_features, feed_dict={x: x_test})
-print (features_train.shape)
-print (features_test.shape)
+
 
 LinearSVM_normal = svm.LinearSVC()
 LinearSVM_features = svm.LinearSVC()
 LinearSVM_normal.fit(x_train, labels_train)
 LinearSVM_features.fit(features_train, labels_train)
-print ("****TEST SCORES FOR USING ENTIRE MNIST****")
-print ("Test score for normal linear SVM:")
-print (accuracy_score(labels_test, LinearSVM_normal.predict(x_test)))
-print ("Test score for featured linear SVM:")
-print (accuracy_score(labels_test, LinearSVM_features.predict(features_test)))
+print ("Accuracy score on MNIST pixels (Linear SVM - entire dataset): " + str(accuracy_score(labels_test, LinearSVM_normal.predict(x_test))))
+print ("Accuracy score on MNIST features (Linear SVM - entire dataset): " + str(accuracy_score(labels_test, LinearSVM_features.predict(features_test))))
 
 LR_normal = LogisticRegression()
 LR_features = LogisticRegression()
 LR_normal.fit(x_train, labels_train)
 LR_features.fit(features_train, labels_train)
-print ("Test score for normal Logistic Regression:")
-print (accuracy_score(labels_test, LR_normal.predict(x_test)))
-print ("Test score for featured Logistic Regression:")
-print (accuracy_score(labels_test, LR_features.predict(features_test)))
+print ("Accuracy score on MNIST pixels (Logistic Regression - entire dataset): " + str(accuracy_score(labels_test, LR_normal.predict(x_test))))
+print ("Accuracy score on MNIST features (Logistic Regression - entire dataset): " + str(accuracy_score(labels_test, LR_features.predict(features_test))))
 
 ### 10 samples per class ###
 x_train_10, y_train_10 = LoadingEvenlyDistributedMnist(10)
@@ -269,20 +264,15 @@ LinearSVM_normal_10 = svm.LinearSVC()
 LinearSVM_features_10 = svm.LinearSVC()
 LinearSVM_normal_10.fit(x_train_10, labels_train_10)
 LinearSVM_features_10.fit(features_train_10, labels_train_10)
-print ("****TEST SCORES FOR USING 10 SAMPLES PER CLASS MNIST****")
-print ("Test score for normal linear SVM for 10 samples per class:")
-print (accuracy_score(labels_test, LinearSVM_normal_10.predict(x_test)))
-print ("Test score for featured linear SVM for 10 samples per class:")
-print (accuracy_score(labels_test, LinearSVM_features_10.predict(features_test)))
+print ("Accuracy score on MNIST pixels (Linear SVM - 10 examples per class): " + str(accuracy_score(labels_test, LinearSVM_normal_10.predict(x_test))))
+print ("Accuracy score on MNIST features (Linear SVM - 10 examples per class): " + str(accuracy_score(labels_test, LinearSVM_features_10.predict(features_test))))
 
 LR_normal_10 = LogisticRegression()
 LR_features_10 = LogisticRegression()
 LR_normal_10.fit(x_train_10, labels_train_10)
 LR_features_10.fit(features_train_10, labels_train_10)
-print ("Test score for normal Logistic Regression for 10 samples per class:")
-print (accuracy_score(labels_test, LR_normal_10.predict(x_test)))
-print ("Test score for featured Logistic Regression for 10 samples per class:")
-print (accuracy_score(labels_test, LR_features_10.predict(features_test)))
+print ("Accuracy score on MNIST pixels (Logistic Regression - 10 examples per class): " + str(accuracy_score(labels_test, LR_normal_10.predict(x_test))))
+print ("Accuracy score on MNIST features (Logistic Regression - 10 examples per class): " + str(accuracy_score(labels_test, LR_features_10.predict(features_test))))
 
 ### 100 samples per class ###
 x_train_100, y_train_100 = LoadingEvenlyDistributedMnist(100)
@@ -295,17 +285,12 @@ LinearSVM_normal_100 = svm.LinearSVC()
 LinearSVM_features_100 = svm.LinearSVC()
 LinearSVM_normal_100.fit(x_train_100, labels_train_100)
 LinearSVM_features_100.fit(features_train_100, labels_train_100)
-print ("****TEST SCORES FOR USING 100 SAMPLES PER CLASS MNIST****")
-print ("Test score for normal linear SVM for 100 samples per class:")
-print (accuracy_score(labels_test, LinearSVM_normal_100.predict(x_test)))
-print ("Test score for featured linear SVM for 100 samples per class:")
-print (accuracy_score(labels_test, LinearSVM_features_100.predict(features_test)))
+print ("Accuracy score on MNIST pixels (Linear SVM - 100 examples per class): " + str(accuracy_score(labels_test, LinearSVM_normal_100.predict(x_test))))
+print ("Accuracy score on MNIST features (Linear SVM - 100 examples per class): " + str(accuracy_score(labels_test, LinearSVM_features_100.predict(features_test))))
 
 LR_normal_100 = LogisticRegression()
 LR_features_100 = LogisticRegression()
 LR_normal_100.fit(x_train_100, labels_train_100)
 LR_features_100.fit(features_train_100, labels_train_100)
-print ("Test score for normal Logistic Regression for 100 samples per class:")
-print (accuracy_score(labels_test, LR_normal_100.predict(x_test)))
-print ("Test score for featured Logistic Regression for 100 samples per class:")
-print (accuracy_score(labels_test, LR_features_100.predict(features_test)))
+print ("Accuracy score on MNIST pixels (Logistic Regression - 100 examples per class): " + str(accuracy_score(labels_test, LR_normal_100.predict(x_test))))
+print ("Accuracy score on MNIST features (Logistic Regression - 100 examples per class): " + str(accuracy_score(labels_test, LR_features_100.predict(features_test))))

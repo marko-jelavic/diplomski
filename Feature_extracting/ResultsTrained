@@ -1,0 +1,170 @@
+Iteration number: 1
+Extracting MNIST_data/train-images-idx3-ubyte.gz
+Extracting MNIST_data/train-labels-idx1-ubyte.gz
+Extracting MNIST_data/t10k-images-idx3-ubyte.gz
+Extracting MNIST_data/t10k-labels-idx1-ubyte.gz
+Accuracy score on MNIST pixels (Linear SVM - entire dataset): 0.9174
+Accuracy score on MNIST features (Linear SVM - entire dataset): 0.9767
+Accuracy score on MNIST pixels (Logistic Regression - entire dataset): 0.9198
+Accuracy score on MNIST features (Logistic Regression - entire dataset): 0.9809
+Accuracy score on MNIST pixels (Linear SVM - 10 examples per class): 0.7222
+Accuracy score on MNIST features (Linear SVM - 10 examples per class): 0.7568
+Accuracy score on MNIST pixels (Logistic Regression - 10 examples per class): 0.7315
+Accuracy score on MNIST features (Logistic Regression - 10 examples per class): 0.7482
+Accuracy score on MNIST pixels (Linear SVM - 100 examples per class): 0.8313
+Accuracy score on MNIST features (Linear SVM - 100 examples per class): 0.9296
+Accuracy score on MNIST pixels (Logistic Regression - 100 examples per class): 0.8585
+Accuracy score on MNIST features (Logistic Regression - 100 examples per class): 0.937
+Iteration number: 2
+Extracting MNIST_data/train-images-idx3-ubyte.gz
+Extracting MNIST_data/train-labels-idx1-ubyte.gz
+Extracting MNIST_data/t10k-images-idx3-ubyte.gz
+Extracting MNIST_data/t10k-labels-idx1-ubyte.gz
+Accuracy score on MNIST pixels (Linear SVM - entire dataset): 0.9171
+Accuracy score on MNIST features (Linear SVM - entire dataset): 0.9755
+Accuracy score on MNIST pixels (Logistic Regression - entire dataset): 0.9198
+Accuracy score on MNIST features (Logistic Regression - entire dataset): 0.9785
+Accuracy score on MNIST pixels (Linear SVM - 10 examples per class): 0.7222
+Accuracy score on MNIST features (Linear SVM - 10 examples per class): 0.7327
+Accuracy score on MNIST pixels (Logistic Regression - 10 examples per class): 0.7315
+Accuracy score on MNIST features (Logistic Regression - 10 examples per class): 0.7261
+Accuracy score on MNIST pixels (Linear SVM - 100 examples per class): 0.8313
+Accuracy score on MNIST features (Linear SVM - 100 examples per class): 0.9301
+Accuracy score on MNIST pixels (Logistic Regression - 100 examples per class): 0.8585
+Accuracy score on MNIST features (Logistic Regression - 100 examples per class): 0.9409
+Iteration number: 3
+Extracting MNIST_data/train-images-idx3-ubyte.gz
+Extracting MNIST_data/train-labels-idx1-ubyte.gz
+Extracting MNIST_data/t10k-images-idx3-ubyte.gz
+Extracting MNIST_data/t10k-labels-idx1-ubyte.gz
+Accuracy score on MNIST pixels (Linear SVM - entire dataset): 0.9172
+Accuracy score on MNIST features (Linear SVM - entire dataset): 0.977
+Accuracy score on MNIST pixels (Logistic Regression - entire dataset): 0.9198
+Accuracy score on MNIST features (Logistic Regression - entire dataset): 0.9795
+Accuracy score on MNIST pixels (Linear SVM - 10 examples per class): 0.7222
+Accuracy score on MNIST features (Linear SVM - 10 examples per class): 0.7679
+Accuracy score on MNIST pixels (Logistic Regression - 10 examples per class): 0.7315
+Accuracy score on MNIST features (Logistic Regression - 10 examples per class): 0.769
+Accuracy score on MNIST pixels (Linear SVM - 100 examples per class): 0.8313
+Accuracy score on MNIST features (Linear SVM - 100 examples per class): 0.9375
+Accuracy score on MNIST pixels (Logistic Regression - 100 examples per class): 0.8585
+Accuracy score on MNIST features (Logistic Regression - 100 examples per class): 0.9438
+Iteration number: 4
+Extracting MNIST_data/train-images-idx3-ubyte.gz
+Extracting MNIST_data/train-labels-idx1-ubyte.gz
+Extracting MNIST_data/t10k-images-idx3-ubyte.gz
+Extracting MNIST_data/t10k-labels-idx1-ubyte.gz
+Accuracy score on MNIST pixels (Linear SVM - entire dataset): 0.9179
+Accuracy score on MNIST features (Linear SVM - entire dataset): 0.977
+Accuracy score on MNIST pixels (Logistic Regression - entire dataset): 0.9198
+Accuracy score on MNIST features (Logistic Regression - entire dataset): 0.9796
+Accuracy score on MNIST pixels (Linear SVM - 10 examples per class): 0.7222
+Accuracy score on MNIST features (Linear SVM - 10 examples per class): 0.7487
+Accuracy score on MNIST pixels (Logistic Regression - 10 examples per class): 0.7315
+Accuracy score on MNIST features (Logistic Regression - 10 examples per class): 0.7393
+Accuracy score on MNIST pixels (Linear SVM - 100 examples per class): 0.8313
+Accuracy score on MNIST features (Linear SVM - 100 examples per class): 0.9259
+Accuracy score on MNIST pixels (Logistic Regression - 100 examples per class): 0.8585
+Accuracy score on MNIST features (Logistic Regression - 100 examples per class): 0.9338
+Iteration number: 5
+Extracting MNIST_data/train-images-idx3-ubyte.gz
+Extracting MNIST_data/train-labels-idx1-ubyte.gz
+Extracting MNIST_data/t10k-images-idx3-ubyte.gz
+Extracting MNIST_data/t10k-labels-idx1-ubyte.gz
+Accuracy score on MNIST pixels (Linear SVM - entire dataset): 0.9175
+Accuracy score on MNIST features (Linear SVM - entire dataset): 0.9774
+Accuracy score on MNIST pixels (Logistic Regression - entire dataset): 0.9198
+Accuracy score on MNIST features (Logistic Regression - entire dataset): 0.9786
+Accuracy score on MNIST pixels (Linear SVM - 10 examples per class): 0.7222
+Accuracy score on MNIST features (Linear SVM - 10 examples per class): 0.7964
+Accuracy score on MNIST pixels (Logistic Regression - 10 examples per class): 0.7315
+Accuracy score on MNIST features (Logistic Regression - 10 examples per class): 0.7843
+Accuracy score on MNIST pixels (Linear SVM - 100 examples per class): 0.8313
+Accuracy score on MNIST features (Linear SVM - 100 examples per class): 0.9322
+Accuracy score on MNIST pixels (Logistic Regression - 100 examples per class): 0.8585
+Accuracy score on MNIST features (Logistic Regression - 100 examples per class): 0.9417
+Iteration number: 6
+Extracting MNIST_data/train-images-idx3-ubyte.gz
+Extracting MNIST_data/train-labels-idx1-ubyte.gz
+Extracting MNIST_data/t10k-images-idx3-ubyte.gz
+Extracting MNIST_data/t10k-labels-idx1-ubyte.gz
+Accuracy score on MNIST pixels (Linear SVM - entire dataset): 0.9174
+Accuracy score on MNIST features (Linear SVM - entire dataset): 0.9754
+Accuracy score on MNIST pixels (Logistic Regression - entire dataset): 0.9198
+Accuracy score on MNIST features (Logistic Regression - entire dataset): 0.978
+Accuracy score on MNIST pixels (Linear SVM - 10 examples per class): 0.7222
+Accuracy score on MNIST features (Linear SVM - 10 examples per class): 0.7722
+Accuracy score on MNIST pixels (Logistic Regression - 10 examples per class): 0.7315
+Accuracy score on MNIST features (Logistic Regression - 10 examples per class): 0.7541
+Accuracy score on MNIST pixels (Linear SVM - 100 examples per class): 0.8313
+Accuracy score on MNIST features (Linear SVM - 100 examples per class): 0.9254
+Accuracy score on MNIST pixels (Logistic Regression - 100 examples per class): 0.8585
+Accuracy score on MNIST features (Logistic Regression - 100 examples per class): 0.935
+Iteration number: 7
+Extracting MNIST_data/train-images-idx3-ubyte.gz
+Extracting MNIST_data/train-labels-idx1-ubyte.gz
+Extracting MNIST_data/t10k-images-idx3-ubyte.gz
+Extracting MNIST_data/t10k-labels-idx1-ubyte.gz
+Accuracy score on MNIST pixels (Linear SVM - entire dataset): 0.9175
+Accuracy score on MNIST features (Linear SVM - entire dataset): 0.9797
+Accuracy score on MNIST pixels (Logistic Regression - entire dataset): 0.9198
+Accuracy score on MNIST features (Logistic Regression - entire dataset): 0.9814
+Accuracy score on MNIST pixels (Linear SVM - 10 examples per class): 0.7222
+Accuracy score on MNIST features (Linear SVM - 10 examples per class): 0.7282
+Accuracy score on MNIST pixels (Logistic Regression - 10 examples per class): 0.7315
+Accuracy score on MNIST features (Logistic Regression - 10 examples per class): 0.71
+Accuracy score on MNIST pixels (Linear SVM - 100 examples per class): 0.8313
+Accuracy score on MNIST features (Linear SVM - 100 examples per class): 0.9301
+Accuracy score on MNIST pixels (Logistic Regression - 100 examples per class): 0.8585
+Accuracy score on MNIST features (Logistic Regression - 100 examples per class): 0.9358
+Iteration number: 8
+Extracting MNIST_data/train-images-idx3-ubyte.gz
+Extracting MNIST_data/train-labels-idx1-ubyte.gz
+Extracting MNIST_data/t10k-images-idx3-ubyte.gz
+Extracting MNIST_data/t10k-labels-idx1-ubyte.gz
+Accuracy score on MNIST pixels (Linear SVM - entire dataset): 0.9174
+Accuracy score on MNIST features (Linear SVM - entire dataset): 0.9802
+Accuracy score on MNIST pixels (Logistic Regression - entire dataset): 0.9198
+Accuracy score on MNIST features (Logistic Regression - entire dataset): 0.9832
+Accuracy score on MNIST pixels (Linear SVM - 10 examples per class): 0.7222
+Accuracy score on MNIST features (Linear SVM - 10 examples per class): 0.7526
+Accuracy score on MNIST pixels (Logistic Regression - 10 examples per class): 0.7315
+Accuracy score on MNIST features (Logistic Regression - 10 examples per class): 0.7394
+Accuracy score on MNIST pixels (Linear SVM - 100 examples per class): 0.8313
+Accuracy score on MNIST features (Linear SVM - 100 examples per class): 0.9368
+Accuracy score on MNIST pixels (Logistic Regression - 100 examples per class): 0.8585
+Accuracy score on MNIST features (Logistic Regression - 100 examples per class): 0.9429
+Iteration number: 9
+Extracting MNIST_data/train-images-idx3-ubyte.gz
+Extracting MNIST_data/train-labels-idx1-ubyte.gz
+Extracting MNIST_data/t10k-images-idx3-ubyte.gz
+Extracting MNIST_data/t10k-labels-idx1-ubyte.gz
+Accuracy score on MNIST pixels (Linear SVM - entire dataset): 0.9174
+Accuracy score on MNIST features (Linear SVM - entire dataset): 0.9722
+Accuracy score on MNIST pixels (Logistic Regression - entire dataset): 0.9198
+Accuracy score on MNIST features (Logistic Regression - entire dataset): 0.9753
+Accuracy score on MNIST pixels (Linear SVM - 10 examples per class): 0.7222
+Accuracy score on MNIST features (Linear SVM - 10 examples per class): 0.7491
+Accuracy score on MNIST pixels (Logistic Regression - 10 examples per class): 0.7315
+Accuracy score on MNIST features (Logistic Regression - 10 examples per class): 0.7351
+Accuracy score on MNIST pixels (Linear SVM - 100 examples per class): 0.8313
+Accuracy score on MNIST features (Linear SVM - 100 examples per class): 0.9228
+Accuracy score on MNIST pixels (Logistic Regression - 100 examples per class): 0.8585
+Accuracy score on MNIST features (Logistic Regression - 100 examples per class): 0.9307
+Iteration number: 10
+Extracting MNIST_data/train-images-idx3-ubyte.gz
+Extracting MNIST_data/train-labels-idx1-ubyte.gz
+Extracting MNIST_data/t10k-images-idx3-ubyte.gz
+Extracting MNIST_data/t10k-labels-idx1-ubyte.gz
+Accuracy score on MNIST pixels (Linear SVM - entire dataset): 0.9178
+Accuracy score on MNIST features (Linear SVM - entire dataset): 0.9766
+Accuracy score on MNIST pixels (Logistic Regression - entire dataset): 0.9198
+Accuracy score on MNIST features (Logistic Regression - entire dataset): 0.9782
+Accuracy score on MNIST pixels (Linear SVM - 10 examples per class): 0.7222
+Accuracy score on MNIST features (Linear SVM - 10 examples per class): 0.7312
+Accuracy score on MNIST pixels (Logistic Regression - 10 examples per class): 0.7315
+Accuracy score on MNIST features (Logistic Regression - 10 examples per class): 0.7106
+Accuracy score on MNIST pixels (Linear SVM - 100 examples per class): 0.8313
+Accuracy score on MNIST features (Linear SVM - 100 examples per class): 0.9282
+Accuracy score on MNIST pixels (Logistic Regression - 100 examples per class): 0.8585
+Accuracy score on MNIST features (Logistic Regression - 100 examples per class): 0.9328

@@ -1,28 +1,26 @@
-****TEST SCORES FOR USING ENTIRE MNIST****
-Test score for normal linear SVM:
-0.9178
-Test score for featured linear SVM:
-0.9765
-Test score for normal Logistic Regression:
-0.9198
-Test score for featured Logistic Regression:
-0.9795
-****TEST SCORES FOR USING 10 SAMPLES PER CLASS MNIST****
-Test score for normal linear SVM for 10 samples per class:
-0.7222
-Test score for featured linear SVM for 10 samples per class:
-0.7576
-Test score for normal Logistic Regression for 10 samples per class:
-0.7315
-Test score for featured Logistic Regression for 10 samples per class:
-0.7447
-****TEST SCORES FOR USING 100 SAMPLES PER CLASS MNIST****
-Test score for normal linear SVM for 100 samples per class:
-0.8313
-Test score for featured linear SVM for 100 samples per class:
-0.9315
-Test score for normal Logistic Regression for 100 samples per class:
-0.8585
-Test score for featured Logistic Regression for 100 samples per class:
-0.9379
-
+********RESULTS UNTRAINED PARSED REPORT********
+Mean accuracy score for Linear SVM on MNIST pixels (entire dataset): 0.9173 with standard deviation: 0.000194935886896
+Mean accuracy score for Linear SVM on MNIST features (entire dataset): 0.93858 with standard deviation: 0.00479391280688
+Mean accuracy score for Linear SVM on MNIST pixels (10 samples per class): 0.7222 with standard deviation: 0.0
+Mean accuracy score for Linear SVM on MNIST features (10 samples per class): 0.66838 with standard deviation: 0.0168260987754
+Mean accuracy score for Linear SVM on MNIST pixels (100 samples per class): 0.8313 with standard deviation: 0.0
+Mean accuracy score for Linear SVM on MNIST features (100 samples per class): 0.83554 with standard deviation: 0.0115383881023
+Mean accuracy score for Logistic Regression on MNIST pixels (entire dataset): 0.9198 with standard deviation: 1.11022302463e-16
+Mean accuracy score for Logistic Regression on MNIST features (entire dataset): 0.93976 with standard deviation: 0.00512702642864
+Mean accuracy score for Logistic Regression on MNIST pixels (10 samples per class): 0.7315 with standard deviation: 1.11022302463e-16
+Mean accuracy score for Logistic Regression on MNIST features (10 samples per class): 0.67694 with standard deviation: 0.0185834442448
+Mean accuracy score for Logistic Regression on MNIST pixels (100 samples per class): 0.8585 with standard deviation: 0.0
+Mean accuracy score for Logistic Regression on MNIST features (100 samples per class): 0.85106 with standard deviation: 0.0100750384615
+********RESULTS TRAINED PARSED REPORT********
+Mean accuracy score for Linear SVM on MNIST pixels (entire dataset): 0.91746 with standard deviation: 0.000228910462845
+Mean accuracy score for Linear SVM on MNIST features (entire dataset): 0.97677 with standard deviation: 0.00212746327818
+Mean accuracy score for Linear SVM on MNIST pixels (10 samples per class): 0.7222 with standard deviation: 0.0
+Mean accuracy score for Linear SVM on MNIST features (10 samples per class): 0.75358 with standard deviation: 0.0200537178598
+Mean accuracy score for Linear SVM on MNIST pixels (100 samples per class): 0.8313 with standard deviation: 0.0
+Mean accuracy score for Linear SVM on MNIST features (100 samples per class): 0.92986 with standard deviation: 0.00447620374871
+Mean accuracy score for Logistic Regression on MNIST pixels (entire dataset): 0.9198 with standard deviation: 1.11022302463e-16
+Mean accuracy score for Logistic Regression on MNIST features (entire dataset): 0.97932 with standard deviation: 0.00205757138394
+Mean accuracy score for Logistic Regression on MNIST pixels (10 samples per class): 0.7315 with standard deviation: 1.11022302463e-16
+Mean accuracy score for Logistic Regression on MNIST features (10 samples per class): 0.74161 with standard deviation: 0.0224188514425
+Mean accuracy score for Logistic Regression on MNIST pixels (100 samples per class): 0.8585 with standard deviation: 0.0
+Mean accuracy score for Logistic Regression on MNIST features (100 samples per class): 0.93744 with standard deviation: 0.00435228675526
