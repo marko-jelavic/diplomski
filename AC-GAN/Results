@@ -1,0 +1,9 @@
+Test accuracy on entire MNIST: 0.9856 - AC-GAN
+Test accuracy on entire MNIST: 0.992 - Discriminator
+
+Test accuracy on 100 samples per class: 0.7548 - AC-GAN
+Test accuracy on 100 samples per class: 0.9189 - Discriminator
+
+Test accuracy on 10 samples per class: 0.164 - AC-GAN
+Test accuracy on 10 samples per class: 0.754 - Discriminator
+

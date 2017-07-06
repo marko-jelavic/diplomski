@@ -201,7 +201,7 @@ with tf.variable_scope("Generated"):
     D_generated_sample, D_generated_class, D_sample_class = Discriminator(G)
 
 
-Classifier_loss = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(logits=D_real_class, labels=y)) + tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(logits=D_generated_class, labels=y))
+Classifier_loss = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(logits=D_real_class, labels=y)) #+ tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(logits=D_generated_class, labels=y))
 
 D_sample_loss_real = tf.reduce_mean(tf.nn.sigmoid_cross_entropy_with_logits(logits=D_real_sample, labels=tf.ones_like(D_real_sample)))
 
@@ -209,7 +209,7 @@ D_sample_loss_generated = tf.reduce_mean(tf.nn.sigmoid_cross_entropy_with_logits
 
 D_sample_loss = D_sample_loss_real + D_sample_loss_generated
 
-Discriminator_loss = Classifier_loss + D_sample_loss
+Discriminator_loss = Classifier_loss
 
 G_sample_loss = tf.reduce_mean(tf.nn.sigmoid_cross_entropy_with_logits(logits=D_generated_sample, labels=tf.ones_like(D_generated_sample)))
 
@@ -225,34 +225,19 @@ sess = tf.InteractiveSession(config=config)
 sess.run(tf.global_variables_initializer())
 
 num_iters = 100001
-batch_size = 100
+#batch_size = 64
 
 if not os.path.exists('generated_samples/'):
     os.makedirs('generated_samples/')
 
 it = 0
 
-
 x_samples, y_samples = LoadingEvenlyDistributedMnist(10)
 
 for i in range(num_iters):
-
-    z_samples = LatentVariables(batch_size)
-    _, error2 = sess.run([train_D, Discriminator_loss], {x: x_samples, z: z_samples, y: y_samples})
-    _, error4 = sess.run([train_G, Generator_loss], {x: x_samples, z: z_samples, y: y_samples})
-
+    _, error2 = sess.run([train_D, Discriminator_loss], {x: x_samples, y: y_samples})
     if i % 5000 == 0:
-        print ("Iteration: " + str(i))
-        print ("Discriminator loss " + str(error2))
-        print ("Generator loss " + str(error4))
-
-        samples = sess.run(G, feed_dict={z: z_samples[:25], y: y_samples[:25]})
-
-        fig = plot(samples)
-        plt.savefig
-        plt.savefig('generated_samples/{}.png'.format(str(it).zfill(3)), bbox_inches='tight')
-        it += 1
-        plt.close(fig)
+        print (i)
 
 x_test, y_test = mnist.test.images, mnist.test.labels
 y_predicted_test = sess.run([D_real_class], {x: x_test})[0]
