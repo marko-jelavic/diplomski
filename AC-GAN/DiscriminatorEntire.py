@@ -225,16 +225,17 @@ sess = tf.InteractiveSession(config=config)
 sess.run(tf.global_variables_initializer())
 
 num_iters = 100001
-#batch_size = 64
+batch_size = 64
 
 if not os.path.exists('generated_samples/'):
     os.makedirs('generated_samples/')
 
 it = 0
 
-x_samples, y_samples = LoadingEvenlyDistributedMnist(10)
+#x_samples, y_samples = LoadingEvenlyDistributedMnist(10)
 
 for i in range(num_iters):
+    x_samples, y_samples = mnist.train.next_batch(batch_size)
     _, error2 = sess.run([train_D, Discriminator_loss], {x: x_samples, y: y_samples})
     if i % 5000 == 0:
         print (i)
