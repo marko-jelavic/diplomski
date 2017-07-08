@@ -209,7 +209,7 @@ D_sample_loss_generated = tf.reduce_mean(tf.nn.sigmoid_cross_entropy_with_logits
 
 D_sample_loss = D_sample_loss_real + D_sample_loss_generated
 
-Discriminator_loss = Classifier_loss + D_sample_loss
+Discriminator_loss = 0.9*Classifier_loss + 0.1*D_sample_loss
 
 G_sample_loss = tf.reduce_mean(tf.nn.sigmoid_cross_entropy_with_logits(logits=D_generated_sample, labels=tf.ones_like(D_generated_sample)))
 
@@ -225,7 +225,7 @@ sess = tf.InteractiveSession(config=config)
 sess.run(tf.global_variables_initializer())
 
 num_iters = 100001
-batch_size = 100
+batch_size = 1000
 
 if not os.path.exists('generated_samples/'):
     os.makedirs('generated_samples/')
@@ -233,11 +233,11 @@ if not os.path.exists('generated_samples/'):
 it = 0
 
 
-#x_samples, y_samples = LoadingEvenlyDistributedMnist(100)
+x_samples, y_samples = LoadingEvenlyDistributedMnist(100)
 
 for i in range(num_iters):
 
-    x_samples, y_samples = mnist.train.next_batch(batch_size)
+    #x_samples, y_samples = mnist.train.next_batch(batch_size)
     z_samples = LatentVariables(batch_size)
     _, error2 = sess.run([train_D, Discriminator_loss], {x: x_samples, z: z_samples, y: y_samples})
     _, error4 = sess.run([train_G, Generator_loss], {x: x_samples, z: z_samples, y: y_samples})

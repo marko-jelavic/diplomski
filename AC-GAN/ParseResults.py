@@ -13,8 +13,8 @@ def ParseAndReport(filename):
     print ("Mean value: " + str(np.mean(resultsList)) + " with stddev: " + str(np.std(resultsList)))
 
 print ("***RESULTS FOR 10 SAMPLES PER CLASS***")
-ParseAndReport("Results10")
+ParseAndReport("ResultsDiscriminator10")
 print ("***RESULTS FOR 100 SAMPLES PER CLASS***")
-ParseAndReport("Results100")
+ParseAndReport("ResultsDiscriminator100")
 print ("***RESULTS FOR ENTIRE MNIST***")
-ParseAndReport("ResultsEntire")
+ParseAndReport("ResultsDiscriminatorEntire")

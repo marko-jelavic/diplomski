@@ -1,0 +1,3 @@
+Test accuracy on 10 samples per class weighted: 0.2213
+Test accuracy on 100 samples per class weighted: 0.8865
+Test accuracy on entire MNIST weighted: 0.9921

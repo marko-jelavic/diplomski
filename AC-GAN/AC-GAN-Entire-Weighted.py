@@ -209,7 +209,7 @@ D_sample_loss_generated = tf.reduce_mean(tf.nn.sigmoid_cross_entropy_with_logits
 
 D_sample_loss = D_sample_loss_real + D_sample_loss_generated
 
-Discriminator_loss = Classifier_loss + D_sample_loss
+Discriminator_loss = 0.9*Classifier_loss + 0.1*D_sample_loss
 
 G_sample_loss = tf.reduce_mean(tf.nn.sigmoid_cross_entropy_with_logits(logits=D_generated_sample, labels=tf.ones_like(D_generated_sample)))
 
@@ -233,7 +233,7 @@ if not os.path.exists('generated_samples/'):
 it = 0
 
 
-#x_samples, y_samples = LoadingEvenlyDistributedMnist(100)
+#x_samples, y_samples = LoadingEvenlyDistributedMnist(10)
 
 for i in range(num_iters):
 
