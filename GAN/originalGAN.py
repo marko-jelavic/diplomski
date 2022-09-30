@@ -8,13 +8,15 @@ from tensorflow.python.keras import models, layers
 
 BATCH_SIZE = 500
 NUM_STEPS = 150001
+IMG_SHAPE = (28, 28, 1)
+Z_DIM = 100
 
 
 # Generating latent variables
 
 
 def generate_latent_variables(batch=BATCH_SIZE):
-    return np.random.normal(0.0, 1.0, size=(batch, 100))
+    return np.random.normal(0.0, 1.0, size=(batch, Z_DIM))
 
 
 # *** PLOTTING SAMPLES ***
@@ -43,7 +45,7 @@ generator.add(layers.Dense(200, activation="relu", input_shape=(100,),
                            kernel_initializer=tf.keras.initializers.truncated_normal(stddev=0.01)))
 generator.add(
     layers.Dense(784, activation="sigmoid", kernel_initializer=tf.keras.initializers.truncated_normal(stddev=0.01)))
-generator.add(layers.Reshape((28, 28, 1)))
+generator.add(layers.Reshape(IMG_SHAPE))
 
 
 def gen_loss_fn(fake_logits):
@@ -51,7 +53,7 @@ def gen_loss_fn(fake_logits):
 
 
 discriminator = models.Sequential()
-discriminator.add(layers.InputLayer((28, 28, 1)))
+discriminator.add(layers.InputLayer(IMG_SHAPE))
 discriminator.add(layers.Flatten())
 discriminator.add(
     layers.Dense(200, activation="relu", kernel_initializer=tf.keras.initializers.truncated_normal(stddev=0.01)))
@@ -96,7 +98,7 @@ def train_step(images):
 
 def train(ds):
     ds = iter(ds)
-
+    it = 0
     for step in range(NUM_STEPS):
         images = next(ds)
         train_step(images)
@@ -105,8 +107,9 @@ def train(ds):
             gif = generate_latent_variables(25)
             print("[{}/{}]".format(step, NUM_STEPS))
             fig = plot(generator(gif))
-            plt.savefig("new_samples/{}.png".format(step), bbox_inches="tight")
+            plt.savefig('new_samples/{}.png'.format(str(it).zfill(3)), bbox_inches='tight')
             plt.close(fig)
+            it += 1
 
 
 train(train_ds)
