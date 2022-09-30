@@ -1,21 +1,25 @@
-import tensorflow as tf
-import numpy as np
-import time
-from tensorflow.examples.tutorials.mnist import input_data
-from scipy import misc
-import matplotlib.pyplot as plt
-import os
 import matplotlib.gridspec as gridspec
+import matplotlib.pyplot as plt
+import numpy as np
+import tensorflow as tf
+from tensorflow.python.keras import models, layers
+
+(train_images, _), (_, _) = tf.keras.datasets.mnist.load_data()
+
+BATCH_SIZE = 500
+NUM_STEPS = 150001
 
 
-mnist = input_data.read_data_sets('MNIST_data', one_hot=True)
+# Generating latent variables
 
-# *** GENERATING LATENT VARIABLES ***
 
-def LatentVariables(batch_size):
-    return np.random.normal(0.0, 1.0, size=(batch_size, 100))
+def generate_latent_variables(batch=BATCH_SIZE):
+    return np.random.normal(0.0, 1.0, size=(batch, 100))
+
 
 # *** PLOTTING SAMPLES ***
+
+
 def plot(samples):
     fig = plt.figure(figsize=(5, 5))
     gs = gridspec.GridSpec(5, 5)
@@ -27,92 +31,82 @@ def plot(samples):
         ax.set_xticklabels([])
         ax.set_yticklabels([])
         ax.set_aspect('equal')
-        plt.imshow(sample.reshape(28, 28), cmap='Greys_r')
+        plt.imshow(sample, cmap='Greys_r')
 
     return fig
 
 
-# *** GENERATOR ARCHITECTURE *** 
+# *** GENERATOR ARCHITECTURE ***
 
-z = tf.placeholder(tf.float32, shape=(None, 100))
-
-g_w1 = tf.Variable(tf.truncated_normal([100, 200], stddev = 0.01))
-g_b1 = tf.Variable(tf.truncated_normal([200], stddev = 0.01))
-
-g_w2 = tf.Variable(tf.truncated_normal([200, 784], stddev = 0.01))
-g_b2 = tf.Variable(tf.truncated_normal([784], stddev = 0.01))
-
-generator_params = [g_w1, g_b1, g_w2, g_b2]
-
-def Generator(z):
-    g1 = tf.nn.relu(tf.matmul(z, g_w1) + g_b1)
-    G = tf.nn.sigmoid(tf.matmul(g1, g_w2) + g_b2)
-    return G
-
-# *** DISCRIMINATOR ARCHITECTURE ***
-
-x = tf.placeholder(tf.float32, shape=(None, 784))
-
-d_w1 = tf.Variable(tf.truncated_normal([784, 200], stddev = 0.01))
-d_b1 = tf.Variable(tf.truncated_normal([200], stddev = 0.01))
-
-d_w2 = tf.Variable(tf.truncated_normal([200, 1], stddev = 0.01))
-d_b2 = tf.Variable(tf.truncated_normal([1], stddev = 0.01))
+generator = models.Sequential()
+generator.add(layers.Dense(200, activation="relu", input_shape=(100,),
+                           kernel_initializer=tf.keras.initializers.truncated_normal(stddev=0.01)))
+generator.add(
+    layers.Dense(784, activation="sigmoid", kernel_initializer=tf.keras.initializers.truncated_normal(stddev=0.01)))
+generator.add(layers.Reshape((28, 28, 1)))
 
 
-discriminator_params = [d_w1, d_b1, d_w2, d_b2]
-
-def Discriminator(x):
-    d1 = tf.nn.relu(tf.matmul(x, d_w1) + d_b1)
-    D_logit = tf.matmul(d1, d_w2) + d_b2
-    D = tf.nn.sigmoid(D_logit)
-    return D, D_logit
-
-G = Generator(z)
-D_real_sample, D_logit_real_sample = Discriminator(x)
-D_generated_sample, D_logit_generated_sample = Discriminator(G)
+def gen_loss_fn(fake_logits):
+    return tf.reduce_mean(tf.nn.sigmoid_cross_entropy_with_logits(tf.ones_like(fake_logits), fake_logits))
 
 
-D_loss_real = tf.reduce_mean(tf.nn.sigmoid_cross_entropy_with_logits(logits=D_logit_real_sample, labels=tf.ones_like(D_real_sample)))
-D_loss_generated = tf.reduce_mean(tf.nn.sigmoid_cross_entropy_with_logits(logits=D_logit_generated_sample, labels=tf.zeros_like(D_generated_sample)))
+discriminator = models.Sequential()
+discriminator.add(layers.InputLayer((28, 28, 1)))
+discriminator.add(layers.Flatten())
+discriminator.add(
+    layers.Dense(200, activation="relu", kernel_initializer=tf.keras.initializers.truncated_normal(stddev=0.01)))
+discriminator.add(
+    layers.Dense(1, kernel_initializer=tf.keras.initializers.truncated_normal(stddev=0.01)))
 
-discriminator_loss = D_loss_real + D_loss_generated
 
-generator_loss = tf.reduce_mean(tf.nn.sigmoid_cross_entropy_with_logits(logits=D_logit_generated_sample, labels=tf.ones_like(D_generated_sample)))
+def disc_loss_fn(real_logits, fake_logits):
+    real_loss = tf.reduce_mean(tf.nn.sigmoid_cross_entropy_with_logits(tf.ones_like(real_logits), real_logits))
+    fake_loss = tf.reduce_mean(tf.nn.sigmoid_cross_entropy_with_logits(tf.zeros_like(fake_logits), fake_logits))
+    return real_loss + fake_loss
 
-train_D = tf.train.GradientDescentOptimizer(0.01).minimize(discriminator_loss, var_list = discriminator_params)
-train_G = tf.train.AdamOptimizer().minimize(generator_loss, var_list = generator_params)
 
-config = tf.ConfigProto()
-config.gpu_options.per_process_gpu_memory_fraction = 0.85
+train_images = train_images / 255
+train_ds = (
+    tf.data.Dataset.from_tensor_slices(train_images).batch(BATCH_SIZE, drop_remainder=True).shuffle(60000).repeat())
 
-sess = tf.InteractiveSession(config=config)
-sess.run(tf.global_variables_initializer())
+g_optim = tf.keras.optimizers.Adam()
+d_optim = tf.keras.optimizers.SGD(0.01)
 
-num_iters = 150001
-batch_size = 500
 
-if not os.path.exists('generated_samples/'):
-    os.makedirs('generated_samples/')
+@tf.function
+def train_step(images):
+    z = generate_latent_variables()
+    with tf.GradientTape() as d_tape, tf.GradientTape() as g_tape:
+        fake_images = generator(z, training=True)
 
-it = 0
+        fake_logits = discriminator(fake_images, training=True)
+        real_logits = discriminator(images, training=True)
 
-for i in range(num_iters):
-    if i % 5000 == 0:
-        samples = sess.run(G, feed_dict={z: LatentVariables(25)})
-        fig = plot(samples)
-        plt.savefig
-        plt.savefig('generated_samples/{}.png'.format(str(it).zfill(3)), bbox_inches='tight')
-        it += 1
-        plt.close(fig)
+        d_loss = disc_loss_fn(real_logits, fake_logits)
+        g_loss = gen_loss_fn(fake_logits)
 
-    x_samples, y = mnist.train.next_batch(batch_size)
-    z_samples = LatentVariables(batch_size)
-    _, error2 = sess.run([train_D, discriminator_loss], {x: x_samples, z: z_samples})
-    _, error4 = sess.run([train_G, generator_loss], {z: z_samples})
+    d_gradients = d_tape.gradient(d_loss, discriminator.trainable_variables)
+    g_gradients = g_tape.gradient(g_loss, generator.trainable_variables)
 
-    if i % 5000 == 0:
-        print ("Iteration: " + str(i))
-        print ("Discriminator loss " + str(error2))
-        print ("Generator loss " + str(error4))
+    d_optim.apply_gradients(zip(d_gradients, discriminator.trainable_variables))
+    g_optim.apply_gradients(zip(g_gradients, generator.trainable_variables))
 
+    return g_loss, d_loss
+
+
+def train(ds):
+    ds = iter(ds)
+
+    for step in range(NUM_STEPS):
+        images = next(ds)
+        train_step(images)
+
+        if step % 5000 == 0:
+            gif = generate_latent_variables(25)
+            print("[{}/{}]".format(step, NUM_STEPS))
+            fig = plot(generator(gif))
+            plt.savefig("new_samples/{}.png".format(step), bbox_inches="tight")
+            plt.close(fig)
+
+
+train(train_ds)
