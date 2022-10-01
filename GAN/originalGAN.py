@@ -42,9 +42,11 @@ def plot(samples):
 
 generator = models.Sequential()
 generator.add(layers.Dense(200, activation="relu", input_shape=(100,),
-                           kernel_initializer=tf.keras.initializers.truncated_normal(stddev=0.01)))
+                           kernel_initializer=tf.keras.initializers.truncated_normal(stddev=0.01),
+                           bias_initializer=tf.keras.initializers.truncated_normal(stddev=0.01)))
 generator.add(
-    layers.Dense(784, activation="sigmoid", kernel_initializer=tf.keras.initializers.truncated_normal(stddev=0.01)))
+    layers.Dense(784, activation="sigmoid", kernel_initializer=tf.keras.initializers.truncated_normal(stddev=0.01),
+                 bias_initializer=tf.keras.initializers.truncated_normal(stddev=0.01)))
 generator.add(layers.Reshape(IMG_SHAPE))
 
 
@@ -56,9 +58,11 @@ discriminator = models.Sequential()
 discriminator.add(layers.InputLayer(IMG_SHAPE))
 discriminator.add(layers.Flatten())
 discriminator.add(
-    layers.Dense(200, activation="relu", kernel_initializer=tf.keras.initializers.truncated_normal(stddev=0.01)))
+    layers.Dense(200, activation="relu", kernel_initializer=tf.keras.initializers.truncated_normal(stddev=0.01),
+                 bias_initializer=tf.keras.initializers.truncated_normal(stddev=0.01)))
 discriminator.add(
-    layers.Dense(1, kernel_initializer=tf.keras.initializers.truncated_normal(stddev=0.01)))
+    layers.Dense(1, kernel_initializer=tf.keras.initializers.truncated_normal(stddev=0.01),
+                 bias_initializer=tf.keras.initializers.truncated_normal(stddev=0.01)))
 
 
 def disc_loss_fn(real_logits, fake_logits):
