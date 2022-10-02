@@ -1,6 +1,5 @@
 import matplotlib.gridspec as gridspec
 import matplotlib.pyplot as plt
-import numpy as np
 import tensorflow as tf
 from tensorflow.python.keras import models, layers
 
@@ -16,7 +15,7 @@ Z_DIM = 100
 
 
 def generate_latent_variables(batch=BATCH_SIZE):
-    return np.random.normal(0.0, 1.0, size=(batch, Z_DIM))
+    return tf.random.uniform([batch, Z_DIM], minval=-1, maxval=1.0)
 
 
 # *** PLOTTING SAMPLES ***
