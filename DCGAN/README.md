@@ -6,3 +6,5 @@ A bit puzzled why the examples look worse with the TF2 implementation, tried to 
 **UPDATE:** After switching latent variable generation from np.random.normal to tf.random.uniform we get closer results
 to initial implementation. Sometimes cutting out initialisation parts helps, sometimes not.
 GAN with 3 fully connected layers experiences some fading later on in the iterations too.
+
+Relevant [paper](https://arxiv.org/pdf/1511.06434.pdf)
